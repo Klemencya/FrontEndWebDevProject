@@ -39,3 +39,8 @@ img {
 p {
     font-size: large;
 }
+
+li {
+    font-size: large;
+    padding: 5px
+}
