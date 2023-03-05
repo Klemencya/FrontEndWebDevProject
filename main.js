@@ -1,6 +1,7 @@
-window.onload = getIDFromURL()
+let email = 'm.sidorskaya@innopolis.university'
+window.onload = getIDFromURL(email)
 
-async function getIDFromURL(email = 'm.sidorskaya@innopolis.university') {
+async function getIDFromURL(email) {
     const params = new URLSearchParams({
         email: email
     }).toString();
@@ -17,18 +18,18 @@ async function getPictureUsingID(id) {
     }).toString();
 
     let response = await fetch('https://getxkcd.vercel.app/api/comic?' + params);
-    let data = await response.json();
+    let response_data = await response.json();
 
     const pic = document.getElementById('picture');
     const picText = document.getElementById('picTitle');
     const picDate = document.getElementById('picDate');
     const altText = document.getElementById('altText');
 
-    pic.alt = data.alt;
-    altText.innerText = data.alt;
-    pic.src = data.img;
-    picText.innerText = data.title;
+    pic.alt = response_data.alt;
+    altText.innerText = response_data.alt;
+    pic.src = response_data.img;
+    picText.innerText = response_data.title;
 
-    let date = new Date(data.year, data.month, data.day);
+    let date = new Date(response_data.year, response_data.month - 1, response_data.day);
     picDate.innerText = date.toLocaleDateString();
 }
